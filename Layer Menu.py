@@ -16,7 +16,14 @@ hijau = 1
 biru = 1
 merah = 1
 
+hijau2 = 1
+biru2 = 1
+merah2 = 1
+
 Pencet = False
+
+PosisiX = 0
+PosisiY = 0
 
 mouseX=int
 mouseY=int
@@ -527,9 +534,9 @@ def timer(value): #fungsi timer
         deltaX += gerakX
         deltaY -= gerakY
 
-    if collisionX1 ==700 :
-        gerakX = -gerakX
-        gerakY = -gerakY
+    if collisionX1 == 400 :
+        deltaX=0
+        deltaY=0
 # def update(value):
 #     glutPostRedisplay()
 #     glutTimerFunc(10,update,0)
@@ -537,7 +544,10 @@ def timer(value): #fungsi timer
 def iniHandleMouse(button,state,x,y):
     global Pencet
     global hijau, biru, merah
+    global hijau2, biru2, merah2
     global boolGerakX
+    global PosisiX,PosisiY
+    
     # Saat mengklik kanan warna kotak akan berubah menjadi warna biru dan merah
     if button == GLUT_RIGHT_BUTTON and state == GLUT_DOWN:
         boolGerakX=True
@@ -552,14 +562,27 @@ def iniHandleMouse(button,state,x,y):
     # Saat mengklik kiri warna kotak akan berubah menjadi warna hijau dan hitam
     elif button == GLUT_LEFT_BUTTON and state == GLUT_DOWN:
         Pencet = True
-        if merah == 1 :
-            hijau = 1
-            biru = 0
-            merah = 0
-        else:
-            hijau = 1
-            biru = 1
-            merah = 1
+        
+        if (261<PosisiX<420 and 255<PosisiY<310): #posisi quit
+            if merah2 == 1 :
+                hijau2 = 1
+                biru2 = 0
+                merah2 = 0
+            else:
+                hijau2 = 1
+                biru2 = 1
+                merah2 = 1
+        elif (261<PosisiX<421 and 191<PosisiY<245): #posisi Start
+            if merah == 1 :
+                hijau = 1
+                biru = 0
+                merah = 0
+            else:
+                hijau = 1
+                biru = 1
+                merah = 1
+
+
 
     # elif button == GLUT_LEFT_BUTTON and state == GLUT_UP:
     #     # Pencet = False
@@ -571,16 +594,20 @@ def iniHandleMouse(button,state,x,y):
 def mouseFunc(mouseX,mouseY):
     # x=mouseX
     # y=mouseY
+    global PosisiX,PosisiY
+    PosisiX = mouseX//2
+    PosisiY = mouseY//2
     global Start
     global boolGerakX
+
     # print(Pencet)
-    if (523<mouseX<840 and 381<mouseY<489) and Pencet == True: #berdasarkan koordinat window
-        print('perintah start ditekan jalan')
-    elif (524<mouseX<840 and 511<mouseY<619) and Pencet == True: #berdasarkan koordinat window
-        print('perintah exit ditekan jalan')
-        # boolgerakX= not boolGerakX
-    # print("posisi mouse x :", mouseX)
-    # print("posisi mouse y :", mouseY)
+    # if (523<mouseX<840 and 381<mouseY<489) and Pencet == True: #berdasarkan koordinat window
+    #     print('perintah start ditekan jalan')
+    # elif (524<mouseX<840 and 511<mouseY<619) and Pencet == True: #berdasarkan koordinat window
+    #     print('perintah exit ditekan jalan')
+    #     # boolgerakX= not boolGerakX
+    print("posisi mouse x :", PosisiX)
+    print("posisi mouse y :", PosisiY)
 def segitiga_kecil():
     #segitiga kecil
     glColor3ub(255, 255, 255)#menetapkan warna menjadi merah
@@ -1155,7 +1182,7 @@ def Bingkai_menu():
 def tulisan_start():
     glPushMatrix()
     
-    #=============START=============
+    #============= START =============
     #huruf s
     #//1
     glColor3f(merah,hijau,biru)
@@ -1167,7 +1194,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_POLYGON)#memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f(-90, -120) #titik u8
     glVertex2f(-90, -110) #titik a8
@@ -1193,7 +1220,7 @@ def tulisan_start():
 
 
     #//3
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_POLYGON)#memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f(-90, -95) #titik b8
     glVertex2f(-90, -85) #titik v8
@@ -1202,7 +1229,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek  
 
     # #//4
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_POLYGON)#memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f(-110, -85) #titik w8
     glVertex2f(-110, -95) #titik c8
@@ -1228,7 +1255,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek  
 
     # #//5
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_POLYGON)#memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f(-110, -60) #titik g8
     glVertex2f(-110, -70) #titik z8
@@ -1239,7 +1266,7 @@ def tulisan_start():
 
     #huruf T
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-65, -60)#titik v9
     glVertex2f (-65, -70)#titik w9
@@ -1248,7 +1275,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-45, -70)#titik z9
     glVertex2f (-35, -70)#titik a10
@@ -1258,7 +1285,7 @@ def tulisan_start():
 
     #huruf A
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-25, -120)#titik n9
     glVertex2f (-10, -120)#titik o9
@@ -1267,7 +1294,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (5, -82)#titik s9
     glVertex2f (5, -60)#titik t9
@@ -1277,7 +1304,7 @@ def tulisan_start():
 
     #huruf r
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (40, -120)#titik b9
     glVertex2f (50, -120)#titik c9
@@ -1286,7 +1313,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek 
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (50, -60)#titik a12
     glVertex2f (50, -70)#titik e9
@@ -1295,7 +1322,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek 
 
     #//3
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_POLYGON)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (70, -70)#titik w11
     glVertex2f (70, -60)#titik v11
@@ -1316,7 +1343,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek 
 
     #//4
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (60, -85)#titik i8
     glVertex2f (70, -120)#titik h8
@@ -1332,7 +1359,7 @@ def tulisan_start():
     
     #huruf T
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (90, -60)#titik k10
     glVertex2f (90, -70)#titik h10
@@ -1341,7 +1368,7 @@ def tulisan_start():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (110, -70)#titik f10
     glVertex2f (120, -70)#titik g10
@@ -1354,7 +1381,7 @@ def tulisan_exit():
     #=============EXIT============= 
     #Huruf E
     #//1
-    glColor3f(merah,hijau,biru)
+    glColor3f(merah2,hijau2,biru2)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-120, -190)#titik t12
     glVertex2f (-75, -190)#titik a13
@@ -1363,7 +1390,7 @@ def tulisan_exit():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah2,hijau2,biru2)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-120, -190)#titik t12
     glVertex2f (-110, -190)#titik d14
@@ -1372,7 +1399,7 @@ def tulisan_exit():
     glEnd()# Mengakhiri objek 
 
     #//3
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah2,hijau2,biru2)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-120, -190)#titik t12
     glVertex2f (-120, -200)#titik c14
@@ -1381,7 +1408,7 @@ def tulisan_exit():
     glEnd()# Mengakhiri objek 
 
     #//4
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah2,hijau2,biru2)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-120, -235)#titik f14
     glVertex2f (-120, -245)#titik s12
@@ -1390,7 +1417,7 @@ def tulisan_exit():
     glEnd()# Mengakhiri objek 
 
     #//5
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-100, -210)#titik d13
     glVertex2f (-100, -220)#titik c13
@@ -1400,7 +1427,7 @@ def tulisan_exit():
 
     #Huruf X
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (-40, -190)#titik i13
     glVertex2f (-20, -190)#titik j13
@@ -1409,7 +1436,7 @@ def tulisan_exit():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (10, -190)#titik k13
     glVertex2f (30, -190)#titik l13
@@ -1419,7 +1446,7 @@ def tulisan_exit():
 
     #Huruf I
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (45, -190)#titik q13
     glVertex2f (60, -190)#titik r13
@@ -1429,7 +1456,7 @@ def tulisan_exit():
 
     #huruf T
     #//1
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (70, -190)#titik s13
     glVertex2f (70, -200)#titik t13
@@ -1438,7 +1465,7 @@ def tulisan_exit():
     glEnd()# Mengakhiri objek  
 
     #//2
-    glColor3f(merah,hijau,biru)
+    # glColor3f(merah,hijau,biru)
     glBegin(GL_QUADS)  # memulai membuat sebuah objek, GL_POLIGON untuk mengambar poligon
     glVertex2f (90, -200)#titik u13
     glVertex2f (100, -200)#titik v13
@@ -1470,6 +1497,7 @@ def iterate():
     glViewport(0, 0, 1364, 700)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
+    # gluOrtho2D(-1364,1364,-700,700)
     gluOrtho2D(-682,682,-350,350)
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
@@ -1479,6 +1507,8 @@ def ShowScreen():
     glLoadIdentity()
     iterate()
     main_menu()
+    # if play == True:
+    #     layer_kalah()
     glFlush()
 
 
